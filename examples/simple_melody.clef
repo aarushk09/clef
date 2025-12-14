@@ -1,0 +1,40 @@
+// Simple Melody Example
+// Demonstrates basic notes, rests, and dynamics
+
+score {
+    tempo 120
+    time 4/4
+    key C major
+
+    staff piano : piano {
+        voice 1 {
+            // First phrase
+            measure 1 {
+                mf
+                C4 q
+                D4 q
+                E4 q
+                F4 q
+            }
+            
+            measure 2 {
+                G4 h
+                E4 q
+                C4 q
+            }
+            
+            measure 3 {
+                D4 q.
+                E4 e
+                F4 q
+                rest q
+            }
+            
+            measure 4 {
+                G4 h.
+                rest q
+            }
+        }
+    }
+}
+

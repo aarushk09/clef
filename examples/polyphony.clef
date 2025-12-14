@@ -1,0 +1,42 @@
+// Polyphony Example
+// Demonstrates multiple voices on a single staff
+
+score {
+    tempo 96
+    time 4/4
+    key G major
+
+    staff piano : piano {
+        // Melody voice (right hand)
+        voice 1 {
+            measure 1 {
+                f
+                G4 q
+                A4 q
+                B4 q
+                C5 q
+            }
+            
+            measure 2 {
+                D5 h
+                B4 h
+            }
+        }
+        
+        // Accompaniment voice (left hand)
+        voice 2 {
+            measure 1 {
+                mp
+                G3 h
+                D3 h
+            }
+            
+            measure 2 {
+                G3 q
+                B3 q
+                D4 h
+            }
+        }
+    }
+}
+

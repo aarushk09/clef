@@ -1,0 +1,101 @@
+// Multiple Staves Example
+// Demonstrates orchestration with multiple instruments
+
+score {
+    tempo 108
+    time 3/4
+    key A major
+
+    // Flute melody
+    staff flute : flute {
+        voice 1 {
+            measure 1 {
+                f
+                A5 q
+                B5 q
+                C#6 q
+            }
+            measure 2 {
+                D6 h
+                C#6 q
+            }
+            measure 3 {
+                B5 q
+                A5 q
+                G#5 q
+            }
+            measure 4 {
+                A5 h.
+            }
+        }
+    }
+
+    // Violin harmony
+    staff violin : violin {
+        voice 1 {
+            measure 1 {
+                mf
+                C#5 q
+                D5 q
+                E5 q
+            }
+            measure 2 {
+                F#5 h
+                E5 q
+            }
+            measure 3 {
+                D5 q
+                C#5 q
+                B4 q
+            }
+            measure 4 {
+                C#5 h.
+            }
+        }
+    }
+
+    // Cello bass line
+    staff cello : cello {
+        voice 1 {
+            measure 1 {
+                mf
+                A3 h.
+            }
+            measure 2 {
+                D3 h.
+            }
+            measure 3 {
+                E3 h.
+            }
+            measure 4 {
+                A2 h.
+            }
+        }
+    }
+
+    // Piano accompaniment
+    staff piano : piano {
+        voice 1 {
+            measure 1 {
+                mp
+                <A3, C#4, E4> q
+                <A3, C#4, E4> q
+                <A3, C#4, E4> q
+            }
+            measure 2 {
+                <D3, F#3, A3> q
+                <D3, F#3, A3> q
+                <D3, F#3, A3> q
+            }
+            measure 3 {
+                <E3, G#3, B3> q
+                <E3, G#3, B3> q
+                <E3, G#3, B3> q
+            }
+            measure 4 {
+                <A2, E3, A3> h.
+            }
+        }
+    }
+}
+

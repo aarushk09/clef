@@ -1,0 +1,42 @@
+// Chords Example
+// Demonstrates chord notation and voicing
+
+score {
+    tempo 80
+    time 4/4
+    key C major
+
+    staff piano : piano {
+        voice 1 {
+            // Basic triads
+            measure 1 {
+                f
+                <C4, E4, G4> q        // C major
+                <D4, F4, A4> q        // D minor
+                <E4, G4, B4> q        // E minor
+                <F4, A4, C5> q        // F major
+            }
+            
+            // Seventh chords
+            measure 2 {
+                <G4, B4, D5, F5> h    // G7
+                <C4, E4, G4, B4> h    // Cmaj7
+            }
+            
+            // Chord with articulation
+            measure 3 {
+                <C4, E4, G4> q staccato
+                <F4, A4, C5> q staccato
+                <G4, B4, D5> q accent
+                <C4, E4, G4> q fermata
+            }
+            
+            // Tied chords
+            measure 4 {
+                <C4, E4, G4> h tie
+                <C4, E4, G4> h
+            }
+        }
+    }
+}
+

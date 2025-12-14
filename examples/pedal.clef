@@ -1,0 +1,62 @@
+// Sustain Pedal Example
+// Demonstrates pedal markings for piano
+
+score {
+    tempo 72
+    time 4/4
+    key Eb major
+
+    staff piano : piano {
+        voice 1 {
+            measure 1 {
+                mp
+                ped               // Press pedal
+                Eb4 q
+                G4 q
+                Bb4 q
+                Eb5 q
+            }
+            
+            measure 2 {
+                ped_change        // Quick release and repress
+                F4 q
+                Ab4 q
+                C5 q
+                F5 q
+            }
+            
+            measure 3 {
+                ped_change
+                G4 q
+                Bb4 q
+                D5 q
+                G5 q
+            }
+            
+            measure 4 {
+                ped_change
+                Eb4 q
+                G4 q
+                Bb4 h
+                ped_up            // Release pedal
+            }
+        }
+        
+        // Left hand bass notes
+        voice 2 {
+            measure 1 {
+                Eb3 w
+            }
+            measure 2 {
+                F3 w
+            }
+            measure 3 {
+                G3 w
+            }
+            measure 4 {
+                Eb3 w
+            }
+        }
+    }
+}
+

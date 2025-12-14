@@ -1,0 +1,148 @@
+// Für Elise (Opening) - Ludwig van Beethoven
+// Demonstrates a real musical piece with proper notation
+
+score {
+    tempo 72
+    time 3/8
+    key A minor
+
+    staff piano : piano {
+        // Right hand
+        voice 1 {
+            // Measure 1-4: Opening motif
+            measure 1 {
+                pp
+                E5 s
+                D#5 s
+                E5 s
+                D#5 s
+                E5 s
+                B4 s
+            }
+            
+            measure 2 {
+                D5 s
+                C5 s
+                A4 q
+            }
+            
+            measure 3 {
+                rest s
+                rest s
+                C4 s
+                E4 s
+                A4 s
+                B4 s
+            }
+            
+            measure 4 {
+                rest s
+                rest s
+                E4 s
+                G#4 s
+                B4 s
+                C5 s
+            }
+            
+            // Measures 5-8: Repeat of opening
+            measure 5 {
+                E5 s
+                D#5 s
+                E5 s
+                D#5 s
+                E5 s
+                B4 s
+            }
+            
+            measure 6 {
+                D5 s
+                C5 s
+                A4 q
+            }
+            
+            measure 7 {
+                rest s
+                rest s
+                C4 s
+                E4 s
+                A4 s
+                B4 s
+            }
+            
+            measure 8 {
+                rest s
+                rest s
+                E4 s
+                C5 s
+                B4 s
+                A4 s
+            }
+        }
+        
+        // Left hand
+        voice 2 {
+            measure 1 {
+                rest q.
+            }
+            
+            measure 2 {
+                A2 s
+                E3 s
+                A3 s
+                rest s
+                rest s
+                rest s
+            }
+            
+            measure 3 {
+                E2 s
+                E3 s
+                G#3 s
+                rest s
+                rest s
+                rest s
+            }
+            
+            measure 4 {
+                A2 s
+                E3 s
+                A3 s
+                rest s
+                rest s
+                rest s
+            }
+            
+            measure 5 {
+                rest q.
+            }
+            
+            measure 6 {
+                A2 s
+                E3 s
+                A3 s
+                rest s
+                rest s
+                rest s
+            }
+            
+            measure 7 {
+                E2 s
+                E3 s
+                G#3 s
+                rest s
+                rest s
+                rest s
+            }
+            
+            measure 8 {
+                A2 s
+                E3 s
+                A3 s
+                rest s
+                rest s
+                rest s
+            }
+        }
+    }
+}
+

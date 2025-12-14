@@ -1,0 +1,178 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Clef",
+  "scopeName": "source.clef",
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#score" },
+    { "include": "#keywords" },
+    { "include": "#pitches" },
+    { "include": "#durations" },
+    { "include": "#dynamics" },
+    { "include": "#articulations" },
+    { "include": "#ornaments" },
+    { "include": "#pedal" },
+    { "include": "#numbers" },
+    { "include": "#strings" }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.double-slash.clef",
+          "match": "//.*$"
+        },
+        {
+          "name": "comment.block.clef",
+          "begin": "/\\*",
+          "end": "\\*/"
+        }
+      ]
+    },
+    "score": {
+      "patterns": [
+        {
+          "name": "keyword.control.structure.clef",
+          "match": "\\b(score|staff|voice|measure)\\b"
+        },
+        {
+          "name": "keyword.control.timing.clef",
+          "match": "\\b(tempo|time|key)\\b"
+        },
+        {
+          "name": "keyword.control.grouping.clef",
+          "match": "\\b(tuplet|in|slur)\\b"
+        },
+        {
+          "name": "keyword.control.connection.clef",
+          "match": "\\b(tie|over)\\b"
+        },
+        {
+          "name": "keyword.control.instrument.clef",
+          "match": "\\b(instrument)\\b"
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.other.mode.clef",
+          "match": "\\b(major|minor)\\b"
+        },
+        {
+          "name": "keyword.other.grace.clef",
+          "match": "\\b(grace)\\b"
+        },
+        {
+          "name": "keyword.other.rest.clef",
+          "match": "\\b(rest)\\b"
+        }
+      ]
+    },
+    "pitches": {
+      "patterns": [
+        {
+          "name": "constant.language.pitch.clef",
+          "match": "\\b([A-Ga-g])(##?|bb?|n)?([0-9])\\b",
+          "captures": {
+            "1": { "name": "constant.language.pitch.note.clef" },
+            "2": { "name": "constant.language.pitch.accidental.clef" },
+            "3": { "name": "constant.numeric.pitch.octave.clef" }
+          }
+        },
+        {
+          "name": "constant.language.pitch.name.clef",
+          "match": "\\b([A-Ga-g])(##?|bb?|n)?\\b(?![0-9])",
+          "captures": {
+            "1": { "name": "constant.language.pitch.note.clef" },
+            "2": { "name": "constant.language.pitch.accidental.clef" }
+          }
+        }
+      ]
+    },
+    "durations": {
+      "patterns": [
+        {
+          "name": "constant.language.duration.clef",
+          "match": "\\b([whqestx])(\\.*)\\b",
+          "captures": {
+            "1": { "name": "constant.language.duration.value.clef" },
+            "2": { "name": "constant.language.duration.dot.clef" }
+          }
+        },
+        {
+          "name": "constant.numeric.fraction.clef",
+          "match": "\\b([0-9]+)/([0-9]+)\\b"
+        }
+      ]
+    },
+    "dynamics": {
+      "patterns": [
+        {
+          "name": "entity.name.tag.dynamics.clef",
+          "match": "\\b(ppp|pp|p|mp|mf|f|ff|fff|fp|sfz|sf)\\b"
+        },
+        {
+          "name": "entity.name.tag.hairpin.clef",
+          "match": "\\b(cresc|decresc|dim)\\b"
+        }
+      ]
+    },
+    "articulations": {
+      "patterns": [
+        {
+          "name": "entity.other.attribute-name.articulation.clef",
+          "match": "\\b(staccato|staccatissimo|legato|accent|tenuto|marcato|fermata)\\b"
+        }
+      ]
+    },
+    "ornaments": {
+      "patterns": [
+        {
+          "name": "entity.other.attribute-name.ornament.clef",
+          "match": "\\b(trill|mordent|turn|inverted_turn|shake)\\b"
+        }
+      ]
+    },
+    "pedal": {
+      "patterns": [
+        {
+          "name": "keyword.control.pedal.clef",
+          "match": "\\b(ped|ped_up|ped_change)\\b"
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "name": "constant.numeric.integer.clef",
+          "match": "\\b[0-9]+\\b"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.clef",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.clef",
+              "match": "\\\\."
+            }
+          ]
+        }
+      ]
+    },
+    "identifiers": {
+      "patterns": [
+        {
+          "name": "variable.other.clef",
+          "match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b"
+        }
+      ]
+    }
+  }
+}
+

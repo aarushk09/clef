@@ -1,0 +1,62 @@
+// Tuplets Example
+// Demonstrates triplets, quintuplets, and nested tuplets
+
+score {
+    tempo 100
+    time 4/4
+    key C major
+
+    staff piano : piano {
+        voice 1 {
+            // Basic triplet (3 notes in the time of 2)
+            measure 1 {
+                mf
+                tuplet 3 in 2 {
+                    C4 e
+                    D4 e
+                    E4 e
+                }
+                F4 q
+                G4 h
+            }
+            
+            // Multiple triplets
+            measure 2 {
+                tuplet 3 in 2 {
+                    A4 e
+                    G4 e
+                    F4 e
+                }
+                tuplet 3 in 2 {
+                    E4 e
+                    D4 e
+                    C4 e
+                }
+                rest h
+            }
+            
+            // Quintuplet (5 in 4)
+            measure 3 {
+                tuplet 5 in 4 {
+                    C4 e
+                    D4 e
+                    E4 e
+                    F4 e
+                    G4 e
+                }
+                rest h
+            }
+            
+            // Quarter note triplet
+            measure 4 {
+                tuplet 3 in 2 {
+                    C4 q
+                    E4 q
+                    G4 q
+                }
+                C5 h
+            }
+        }
+    }
+}
+

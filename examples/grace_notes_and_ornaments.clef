@@ -1,0 +1,39 @@
+// Grace Notes and Ornaments Example
+// Demonstrates trills, mordents, and turns
+
+score {
+    tempo 100
+    time 4/4
+    key Bb major
+
+    staff piano : piano {
+        voice 1 {
+            // Trill
+            measure 1 {
+                mf
+                Bb4 h trill
+                D5 h trill
+            }
+            
+            // Mordent
+            measure 2 {
+                F4 q mordent
+                G4 q
+                A4 q mordent
+                Bb4 q
+            }
+            
+            // Turn
+            measure 3 {
+                Bb4 h turn
+                F5 h turn
+            }
+            
+            // Inverted turn
+            measure 4 {
+                D5 h inverted_turn
+                Bb4 h
+            }
+        }
+    }
+}

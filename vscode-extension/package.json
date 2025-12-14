@@ -1,0 +1,123 @@
+{
+  "name": "clef-lang",
+  "displayName": "Clef Music Language",
+  "description": "Syntax highlighting and language support for the Clef music programming language",
+  "version": "0.1.0",
+  "publisher": "clef-lang",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "keywords": [
+    "music",
+    "notation",
+    "midi",
+    "clef",
+    "sheet music"
+  ],
+  "activationEvents": [
+    "onLanguage:clef"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "clef",
+        "aliases": [
+          "Clef",
+          "clef"
+        ],
+        "extensions": [
+          ".clef"
+        ],
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "light": "./icons/clef-light.png",
+          "dark": "./icons/clef-dark.png"
+        }
+      }
+    ],
+    "grammars": [
+      {
+        "language": "clef",
+        "scopeName": "source.clef",
+        "path": "./syntaxes/clef.tmLanguage.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "clef.run",
+        "title": "Clef: Run Score",
+        "icon": "$(play)"
+      },
+      {
+        "command": "clef.validate",
+        "title": "Clef: Validate Score",
+        "icon": "$(check)"
+      },
+      {
+        "command": "clef.build",
+        "title": "Clef: Build to MIDI",
+        "icon": "$(file-binary)"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "when": "resourceLangId == clef",
+          "command": "clef.run",
+          "group": "navigation"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "clef.run",
+        "key": "ctrl+shift+r",
+        "mac": "cmd+shift+r",
+        "when": "resourceLangId == clef"
+      },
+      {
+        "command": "clef.validate",
+        "key": "ctrl+shift+v",
+        "mac": "cmd+shift+v",
+        "when": "resourceLangId == clef"
+      }
+    ],
+    "configuration": {
+      "title": "Clef",
+      "properties": {
+        "clef.soundfontPath": {
+          "type": "string",
+          "default": "",
+          "description": "Path to a SoundFont (.sf2) file for playback"
+        },
+        "clef.validateOnSave": {
+          "type": "boolean",
+          "default": true,
+          "description": "Validate Clef files on save"
+        },
+        "clef.pythonPath": {
+          "type": "string",
+          "default": "python",
+          "description": "Path to Python interpreter with Clef installed"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/vscode": "^1.75.0",
+    "typescript": "^5.0.0",
+    "@vscode/vsce": "^2.19.0"
+  }
+}
+

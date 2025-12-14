@@ -1,0 +1,58 @@
+// Ties and Slurs Example
+// Demonstrates tied notes and slurred phrases
+
+score {
+    tempo 72
+    time 4/4
+    key D major
+
+    staff piano : piano {
+        voice 1 {
+            // Basic tie across bar line
+            measure 1 {
+                mf
+                D4 q
+                E4 q
+                F#4 h tie
+            }
+            
+            measure 2 {
+                F#4 h  // Tied from previous
+                G4 q
+                A4 q
+            }
+            
+            // Slurred phrase
+            measure 3 {
+                slur {
+                    D4 q
+                    E4 q
+                    F#4 q
+                    G4 q
+                }
+            }
+            
+            measure 4 {
+                slur {
+                    A4 e
+                    G4 e
+                    F#4 e
+                    E4 e
+                }
+                D4 h
+            }
+            
+            // Multiple ties
+            measure 5 {
+                D4 h tie
+                D4 q tie
+                D4 q
+            }
+            
+            measure 6 {
+                D4 w
+            }
+        }
+    }
+}
+

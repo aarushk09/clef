@@ -1,0 +1,153 @@
+// Clef Music Language Grammar
+// A notation-complete music programming language
+
+// Entry point
+start: score
+
+// Score definition
+score: "score" "{" score_item* "}"
+
+score_item: tempo_mark
+          | time_signature
+          | key_signature
+          | staff
+
+// Tempo marking
+tempo_mark: "tempo" INTEGER
+
+// Time signature
+time_signature: "time" INTEGER "/" INTEGER
+
+// Key signature (e.g., key C major, key F# minor)
+key_signature: "key" PITCH_NAME ACCIDENTAL? MODE
+
+MODE: "major" | "minor"
+
+// Staff definition
+staff: "staff" IDENTIFIER instrument_spec? "{" staff_item* "}"
+
+instrument_spec: ":" IDENTIFIER
+
+staff_item: voice
+          | measure
+          | tempo_mark
+          | time_signature
+          | key_signature
+          | instrument_change
+
+// Instrument change within a staff
+instrument_change: "instrument" IDENTIFIER
+
+// Voice definition
+voice: "voice" INTEGER "{" voice_item* "}"
+
+voice_item: measure
+          | tempo_mark
+          | time_signature
+
+// Measure definition
+measure: "measure" INTEGER? "{" measure_content* "}"
+
+measure_content: note_or_chord
+               | rest
+               | tuplet
+               | slur_group
+               | dynamic
+               | hairpin
+               | pedal
+               | tempo_mark
+               | time_signature
+               | voice_in_measure
+
+// Voice content within a measure (for synchronized hands)
+voice_in_measure: "voice" INTEGER "{" measure_content+ "}"
+
+// Notes and chords
+note_or_chord: (note | chord) articulation* ornament* tie?
+
+note: pitch duration dotting*
+    | grace_note pitch duration dotting*
+
+chord: "<" pitch ("," pitch)* ">" duration dotting*
+
+grace_note: "grace" pitch
+
+// Pitch representation
+pitch: PITCH_NAME ACCIDENTAL? OCTAVE
+
+PITCH_NAME: /[A-Ga-g]/
+
+ACCIDENTAL: "#" | "##" | "b" | "bb" | "n"
+
+OCTAVE: /[0-9]/
+
+// Duration values
+duration: DURATION_NAME | FRACTION
+
+DURATION_NAME: "w"      // whole
+             | "h"      // half
+             | "q"      // quarter
+             | "e"      // eighth
+             | "s"      // sixteenth
+             | "t"      // thirty-second
+             | "x"      // sixty-fourth
+
+// Dotting
+dotting: "."
+
+// Fraction for custom durations
+FRACTION: INTEGER "/" INTEGER
+
+// Rest
+rest: "rest" duration dotting*
+
+// Tie
+tie: "tie"
+
+// Slur group
+slur_group: "slur" "{" measure_content+ "}"
+
+// Tuplet
+tuplet: "tuplet" INTEGER "in" INTEGER "{" measure_content+ "}"
+
+// Dynamics
+dynamic: DYNAMIC_MARK
+
+DYNAMIC_MARK: "ppp" | "pp" | "p" | "mp" | "mf" | "f" | "ff" | "fff" | "fp" | "sfz" | "sf"
+
+// Hairpin (crescendo/decrescendo)
+hairpin: HAIRPIN_TYPE "over" INTEGER ("/" INTEGER)?
+
+HAIRPIN_TYPE: "cresc" | "decresc" | "dim"
+
+// Articulations
+articulation: ARTICULATION_TYPE
+
+ARTICULATION_TYPE: "staccato" | "staccatissimo" | "legato" | "accent" | "tenuto" | "marcato" | "fermata"
+
+// Ornaments
+ornament: ORNAMENT_TYPE
+        | trill
+
+ORNAMENT_TYPE: "mordent" | "turn" | "inverted_turn" | "shake"
+
+trill: "trill" ("(" pitch ")")?
+
+// Pedal
+pedal: PEDAL_TYPE
+
+PEDAL_TYPE: "ped" | "ped_up" | "ped_change"
+
+// Terminals
+IDENTIFIER: /[a-zA-Z_][a-zA-Z0-9_]*/
+INTEGER: /[0-9]+/
+
+// Comments and whitespace
+COMMENT: "//" /[^\n]/*
+BLOCK_COMMENT: "/*" /(.|\n)*?/ "*/"
+
+%import common.WS
+%ignore WS
+%ignore COMMENT
+%ignore BLOCK_COMMENT
+

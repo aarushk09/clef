@@ -1,0 +1,116 @@
+// Liszt – La Campanella (Opening Measures)
+// Both hands together in synchronized measures
+
+score {
+    tempo 132
+    time 6/8
+    key G# minor
+
+    staff piano : piano {
+        measure 1 {
+            p
+            ped
+            voice 1 {
+                rest q.
+                G#6 e staccato
+                rest e
+                G#6 e staccato
+            }
+            voice 2 {
+                G#2 e
+                rest e
+                D#3 e
+                rest e
+                G#3 e
+                rest e
+            }
+        }
+
+        measure 2 {
+            voice 1 {
+                rest q.
+                G#6 e staccato
+                rest e
+                G#6 e staccato
+            }
+            voice 2 {
+                G#2 e
+                rest e
+                D#3 e
+                rest e
+                G#3 e
+                rest e
+            }
+        }
+
+        measure 3 {
+            voice 1 {
+                rest q.
+                A6 e staccato
+                rest e
+                A6 e staccato
+            }
+            voice 2 {
+                A2 e
+                rest e
+                E3 e
+                rest e
+                A3 e
+                rest e
+            }
+        }
+
+        measure 4 {
+            voice 1 {
+                rest q.
+                G#6 e staccato
+                rest e
+                G#6 e staccato
+            }
+            voice 2 {
+                G#2 e
+                rest e
+                D#3 e
+                rest e
+                G#3 e
+                rest e
+            }
+        }
+
+        measure 5 {
+            mf
+            voice 1 {
+                rest q.
+                E6 e staccato
+                rest e
+                E6 e staccato
+            }
+            voice 2 {
+                E2 e
+                rest e
+                B2 e
+                rest e
+                E3 e
+                rest e
+            }
+        }
+
+        measure 6 {
+            voice 1 {
+                rest q.
+                G#6 e staccato
+                rest e
+                G#6 e staccato
+            }
+            voice 2 {
+                G#2 e
+                rest e
+                D#3 e
+                rest e
+                G#3 e
+                rest e
+                ped_up
+            }
+        }
+    }
+}

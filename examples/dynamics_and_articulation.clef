@@ -1,0 +1,84 @@
+// Dynamics and Articulation Example
+// Demonstrates all dynamics and articulation markings
+
+score {
+    tempo 90
+    time 4/4
+    key F major
+
+    staff piano : piano {
+        voice 1 {
+            // Dynamics progression
+            measure 1 {
+                pp
+                F4 q
+                A4 q
+                p
+                C5 q
+                F5 q
+            }
+            
+            measure 2 {
+                mp
+                E5 q
+                mf
+                D5 q
+                f
+                C5 q
+                ff
+                Bb4 q
+            }
+            
+            // Articulations
+            measure 3 {
+                mf
+                F4 q staccato
+                A4 q staccato
+                C5 q accent
+                F5 q tenuto
+            }
+            
+            measure 4 {
+                F4 q legato
+                G4 q legato
+                A4 q marcato
+                Bb4 q fermata
+            }
+            
+            // Crescendo and decrescendo
+            measure 5 {
+                p
+                cresc over 4
+                C4 q
+                D4 q
+                E4 q
+                F4 q
+            }
+            
+            measure 6 {
+                f
+                decresc over 4
+                G4 q
+                F4 q
+                E4 q
+                D4 q
+            }
+            
+            // Special dynamics
+            measure 7 {
+                sfz
+                C4 q
+                p
+                E4 q
+                fp
+                G4 h
+            }
+            
+            measure 8 {
+                sf
+                C5 w
+            }
+        }
+    }
+}
+

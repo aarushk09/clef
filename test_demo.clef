@@ -1,0 +1,38 @@
+// Simple Demo - Twinkle Twinkle Little Star
+score {
+    tempo 300
+    time 4/4
+    key G major
+
+    staff piano : piano {
+        voice 1 {
+            measure 1 {
+                mf
+                C4 q
+                C4 q
+                G4 q
+                G4 q
+            }
+            
+            measure 2 {
+                A4 q
+                A4 q
+                G4 h
+            }
+            
+            measure 3 {
+                F4 q
+                F4 q
+                E4 q
+                E4 q
+            }
+            
+            measure 4 {
+                D4 q
+                D4 q
+                C4 h
+            }
+        }
+    }
+}
+

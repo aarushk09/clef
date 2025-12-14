@@ -1,0 +1,68 @@
+// Time Signature Changes Example
+// Demonstrates changing time signatures within a piece
+
+score {
+    tempo 120
+    time 4/4
+    key E minor
+
+    staff piano : piano {
+        voice 1 {
+            // 4/4 section
+            measure 1 {
+                f
+                E4 q
+                F#4 q
+                G4 q
+                A4 q
+            }
+            
+            measure 2 {
+                B4 h
+                A4 q
+                G4 q
+            }
+            
+            // Change to 3/4
+            measure 3 {
+                time 3/4
+                E4 q
+                G4 q
+                B4 q
+            }
+            
+            measure 4 {
+                E5 h
+                D5 q
+            }
+            
+            // Change to 6/8
+            measure 5 {
+                time 6/8
+                E4 e
+                F#4 e
+                G4 e
+                A4 e
+                B4 e
+                C5 e
+            }
+            
+            // Change to 5/4
+            measure 6 {
+                time 5/4
+                D5 q
+                C5 q
+                B4 q
+                A4 q
+                G4 q
+            }
+            
+            // Back to 4/4
+            measure 7 {
+                time 4/4
+                E4 w
+            }
+        }
+    }
+}
+
