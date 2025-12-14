@@ -36,21 +36,35 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+transcribe = [
+    "pdf2image>=1.16.0",
+    "music21>=9.1.0",
+    "Pillow>=10.0.0",
+]
+omr = [
+    "pdf2image>=1.16.0",
+    "music21>=9.1.0",
+    "Pillow>=10.0.0",
+    "oemer>=0.1.0",
+]
 dev = [
     "pytest>=7.0.0",
     "pytest-cov>=4.0.0",
     "black>=23.0.0",
     "mypy>=1.0.0",
 ]
+all = [
+    "clef-lang[transcribe,dev]",
+]
 
 [project.scripts]
 clef = "clef.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/clef-lang/clef"
-Documentation = "https://github.com/clef-lang/clef#readme"
-Repository = "https://github.com/clef-lang/clef"
-Issues = "https://github.com/clef-lang/clef/issues"
+Homepage = "https://github.com/aarushk09/clef"
+Documentation = "https://github.com/aarushk09/clef#readme"
+Repository = "https://github.com/aarushk09/clef"
+Issues = "https://github.com/aarushk09/clef/issues"
 
 [tool.setuptools.packages.find]
 where = ["."]

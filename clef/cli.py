@@ -454,6 +454,143 @@ def events(source: Path):
         sys.exit(1)
 
 
+@main.command()
+@click.argument("source", type=click.Path(exists=True, path_type=Path))
+@click.option("--output", "-o", type=click.Path(path_type=Path),
+              help="Output Clef file path (default: source with .clef extension)")
+@click.option("--dpi", default=300, help="PDF rendering DPI (default: 300)")
+@click.option("--first-page", type=int, help="First page to process (1-indexed)")
+@click.option("--last-page", type=int, help="Last page to process (1-indexed)")
+def transcribe(source: Path, output: Optional[Path], dpi: int,
+               first_page: Optional[int], last_page: Optional[int]):
+    """
+    Transcribe sheet music (PDF/MusicXML/MIDI) to Clef code.
+    
+    Uses Optical Music Recognition to convert PDF sheet music into
+    editable Clef source code that can then be compiled to MIDI.
+    
+    Supported formats:
+    - PDF (requires pdf2image + poppler)
+    - MusicXML (.xml, .musicxml, .mxl)
+    - MIDI (.mid, .midi)
+    
+    Examples:
+        clef transcribe sheet_music.pdf              # Output: sheet_music.clef
+        clef transcribe score.pdf -o myscore.clef   # Custom output path
+        clef transcribe score.pdf --dpi 400         # Higher quality OCR
+        clef transcribe song.mid                    # Convert MIDI to Clef
+        clef transcribe score.musicxml              # Convert MusicXML to Clef
+    
+    Workflow:
+        1. clef transcribe sheet_music.pdf -o score.clef
+        2. Edit score.clef as needed
+        3. clef build score.clef -o output.mid
+    """
+    try:
+        from clef.transcribe import transcribe_pdf, TranscriptionResult
+        from clef.transcribe.transcriber import transcribe_musicxml, transcribe_midi
+        
+        console.print(f"\n[bold]Transcribing:[/bold] {source.name}\n")
+        
+        # Determine input type and output path
+        suffix = source.suffix.lower()
+        
+        if output is None:
+            output = source.with_suffix(".clef")
+        
+        # Transcribe based on format
+        if suffix == ".pdf":
+            result = transcribe_pdf(
+                str(source),
+                output_path=str(output),
+                dpi=dpi,
+                first_page=first_page,
+                last_page=last_page,
+            )
+        elif suffix in (".xml", ".musicxml", ".mxl"):
+            result = transcribe_musicxml(
+                str(source),
+                output_path=str(output),
+            )
+        elif suffix in (".mid", ".midi"):
+            result = transcribe_midi(
+                str(source),
+                output_path=str(output),
+            )
+        else:
+            print_error(
+                "Unsupported Format",
+                f"Cannot transcribe {suffix} files.\n"
+                "Supported: .pdf, .xml, .musicxml, .mxl, .mid, .midi"
+            )
+            sys.exit(1)
+        
+        # Show results
+        if result.warnings:
+            for warning in result.warnings:
+                print_warning(warning)
+        
+        if result.errors:
+            for error in result.errors:
+                print_error("Transcription Error", error)
+            sys.exit(1)
+        
+        if result.success:
+            # Show summary
+            console.print()
+            table = Table(title="Transcription Result", show_header=False)
+            table.add_column("Property", style="cyan")
+            table.add_column("Value")
+            
+            table.add_row("Output", str(output))
+            
+            if result.score:
+                if result.score.title:
+                    table.add_row("Title", result.score.title)
+                if result.score.tempo:
+                    table.add_row("Tempo", f"{result.score.tempo} BPM")
+                if result.score.time_signature:
+                    num, denom = result.score.time_signature
+                    table.add_row("Time Signature", f"{num}/{denom}")
+                if result.score.key_signature:
+                    table.add_row("Key", result.score.key_signature)
+                table.add_row("Staves", str(len(result.score.staves)))
+                
+                total_measures = sum(
+                    len(staff.measures) for staff in result.score.staves
+                )
+                table.add_row("Measures", str(total_measures))
+            
+            console.print(table)
+            console.print()
+            
+            print_success(f"Transcribed to: {output}")
+            console.print()
+            console.print("[dim]Next steps:[/dim]")
+            console.print(f"  1. Edit [cyan]{output}[/cyan] as needed")
+            console.print(f"  2. Run [cyan]clef validate {output}[/cyan] to check")
+            console.print(f"  3. Run [cyan]clef build {output}[/cyan] to create MIDI")
+        else:
+            print_error("Transcription Failed", "Could not transcribe the file")
+            sys.exit(1)
+    
+    except ImportError as e:
+        print_error(
+            "Missing Dependencies",
+            f"{e}\n\n"
+            "Install transcription dependencies with:\n"
+            "  pip install pdf2image music21\n\n"
+            "For PDF support, also install poppler:\n"
+            "  Windows: Download from https://github.com/osbourne/poppler-windows/releases\n"
+            "  macOS:   brew install poppler\n"
+            "  Linux:   apt install poppler-utils"
+        )
+        sys.exit(1)
+    except Exception as e:
+        print_error("Error", str(e))
+        sys.exit(1)
+
+
 if __name__ == "__main__":
     main()
 

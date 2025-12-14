@@ -40,6 +40,7 @@ Clef is a real programming language for music notation that can represent 100% o
 - **MIDI export**: Standard MIDI file output
 - **CLI tool**: Run, build, and validate from the command line
 - **VS Code extension**: Syntax highlighting and IDE integration
+- **PDF Transcription**: Convert PDF sheet music to Clef code using OMR
 
 ## Installation
 
@@ -403,6 +404,48 @@ clef info
 clef events score.clef
 ```
 
+### Transcribe Sheet Music
+
+Convert PDF sheet music, MusicXML, or MIDI files to Clef code:
+
+```bash
+# Install transcription dependencies
+pip install clef-lang[transcribe]
+
+# For PDF support, also install poppler:
+# macOS: brew install poppler
+# Ubuntu: apt install poppler-utils
+# Windows: Download from https://github.com/osbourne/poppler-windows/releases
+
+# Transcribe PDF sheet music to Clef code
+clef transcribe sheet_music.pdf                  # Output: sheet_music.clef
+clef transcribe sheet_music.pdf -o myscore.clef  # Custom output path
+clef transcribe sheet_music.pdf --dpi 400        # Higher quality OCR
+
+# Convert MusicXML or MIDI
+clef transcribe score.musicxml
+clef transcribe song.mid
+```
+
+**Workflow: PDF → Clef → MIDI**
+
+```bash
+# 1. Transcribe the PDF
+clef transcribe la_campanella.pdf -o la_campanella.clef
+
+# 2. Edit the Clef code as needed (fix any OCR errors)
+code la_campanella.clef
+
+# 3. Validate the score
+clef validate la_campanella.clef
+
+# 4. Build to MIDI
+clef build la_campanella.clef -o la_campanella.mid
+
+# 5. Play it!
+clef run la_campanella.clef
+```
+
 ## VS Code Extension
 
 Install the Clef extension for Visual Studio Code:
@@ -454,6 +497,21 @@ midi = MidiFileBackend()
 midi.export_midi(graph, "output.mid")
 ```
 
+### Transcription API
+
+```python
+from clef import transcribe_pdf
+
+# Transcribe PDF to Clef code
+result = transcribe_pdf("sheet_music.pdf", "output.clef")
+
+if result.success:
+    print(f"Generated Clef code:\n{result.clef_code}")
+    print(f"Found {len(result.score.staves)} staves")
+else:
+    print(f"Errors: {result.errors}")
+```
+
 ## Architecture
 
 ```
@@ -476,6 +534,12 @@ clef/
 │   │   ├── base.py      # Backend interface
 │   │   ├── fluidsynth_backend.py
 │   │   ├── midi_backend.py
+│   │   └── __init__.py
+│   ├── transcribe/      # PDF/MusicXML/MIDI transcription
+│   │   ├── pdf_reader.py    # PDF to image conversion
+│   │   ├── omr.py           # Optical Music Recognition
+│   │   ├── generator.py     # Clef code generation
+│   │   ├── transcriber.py   # Main transcription orchestrator
 │   │   └── __init__.py
 │   ├── cli.py           # Command-line interface
 │   ├── grammar.lark     # Formal grammar

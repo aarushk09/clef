@@ -21,3 +21,21 @@ __all__ = [
     "__version__",
 ]
 
+# Transcription support (optional, requires extra dependencies)
+def transcribe_pdf(pdf_path: str, output_path: str = None, **kwargs):
+    """
+    Transcribe PDF sheet music to Clef code.
+    
+    Requires: pip install clef-lang[transcribe]
+    
+    Args:
+        pdf_path: Path to the PDF file
+        output_path: Path to write the Clef code (optional)
+        **kwargs: Additional options (dpi, first_page, last_page)
+    
+    Returns:
+        TranscriptionResult with the generated Clef code
+    """
+    from clef.transcribe import transcribe_pdf as _transcribe_pdf
+    return _transcribe_pdf(pdf_path, output_path, **kwargs)
+
