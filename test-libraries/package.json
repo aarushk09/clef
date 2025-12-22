@@ -1,0 +1,19 @@
+{
+  "name": "edpear-libraries-test",
+  "version": "1.0.0",
+  "description": "Test project for EdPear CLI and SDK",
+  "type": "module",
+  "scripts": {
+    "test:cli": "node test-cli.js",
+    "test:sdk": "node test-sdk.js",
+    "test:workflow": "node test-full-workflow.js",
+    "test:all": "npm run test:cli && npm run test:sdk"
+  },
+  "dependencies": {
+    "@edpear/sdk": "^1.0.0",
+    "axios": "^1.6.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0"
+  }
+}
